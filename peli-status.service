@@ -7,4 +7,4 @@ RestartSec=5s
 ExecStart=python3 %PWD/status.py
 
 [Install]
-WantedBy=basic.target
+WantedBy=default.target
