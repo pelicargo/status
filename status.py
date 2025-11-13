@@ -38,7 +38,7 @@ class HTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         """Handle GET requests"""
         # Do something
-        self.send_response(200)
+        self.send_response_only(200)
         self.end_headers()
         info = query()
         self.wfile.write(queryCache())
