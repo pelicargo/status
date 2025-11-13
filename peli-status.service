@@ -1,0 +1,10 @@
+[Unit]
+Description=Pelicargo Status Daemon
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+ExecStart=python3 %PWD/status.py
+
+[Install]
+WantedBy=default.target
