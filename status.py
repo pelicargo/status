@@ -36,13 +36,18 @@ def queryCache():
 
 class HTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        """Handle GET requests"""
-        # Do something
         self.send_response_only(200)
         self.end_headers()
         info = query()
         self.wfile.write(queryCache())
 
+class TimeoutServer(http.server.HTTPServer):
+    def get_request(self):
+        res = super().get_request()
+        res[0].settimeout(5)
+        return res
+
 server_address = ('', 8086)
-httpd = http.server.HTTPServer(server_address, HTTPRequestHandler)
-httpd.serve_forever()
+httpd = TimeoutServer(server_address, HTTPRequestHandler)
+while 1:
+    httpd.handle_request()
